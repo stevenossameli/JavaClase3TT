@@ -1,4 +1,4 @@
-package paquete;
+package paquete.util;
 
 public class MiFactory {
     public static Object getInstance(String objName){

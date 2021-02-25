@@ -1,4 +1,8 @@
-package paquete;
+package paquete.main;
+
+import paquete.util.MiFactory;
+import paquete.Sorter;
+import paquete.util.ReadProperties;
 
 import java.io.FileInputStream;
 import java.util.Comparator;
@@ -6,17 +10,20 @@ import java.util.Objects;
 import java.util.Properties;
 
 public class Programa {
+
+    // Ordenar un arreglo de Integers y un arreglo de Strings
     public static void main(String[] args) {
 
-        Sorter<?> sorter = (Sorter<?>) MiFactory.getInstance(leerProperties("sorter"));
+        String objName = ReadProperties.leer("sorter");
+        Sorter<?> sorter = (Sorter<?>) MiFactory.getInstance(objName);
 
         Integer[] iArr = {6, 3, 5, 1, 8, 2, 9, 7, 4};
-        Comparator<Integer> iComp = (a, b)->a-b;
+        Comparator<Integer> iComp = (a, b) -> a - b;
 
-        String [] sArr = {"Pablo", "Alberto", "Juan", "Carlos"};
-        Comparator<String>  sComp  = (a,b) -> a.compareToIgnoreCase(b);
+        String[] sArr = {"Pablo", "Alberto", "Juan", "Carlos"};
+        Comparator<String> sComp = (a, b) -> a.compareToIgnoreCase(b);
 
-        if(sorter!=null) {
+        if (sorter != null) {
             sorter.sort(iArr, iComp);
             sorter.sort(sArr, sComp);
         }
@@ -24,24 +31,21 @@ public class Programa {
         imprimir(iArr);
         imprimir(sArr);
 
-
     }
 
-    public static <T> void imprimir(T[] arr)
-    {
-        for(int i=0; i<arr.length;i++)
-        {
-            System.out.print(arr[i]+(i<arr.length-1?",":"\n"));
+    public static <T> void imprimir(T[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + (i < arr.length - 1 ? "," : "\n"));
         }
     }
 
 
-    public static String leerProperties(String key){
+    public static String leerProperties(String key) {
 
         Properties props = new Properties();
 
         String rootPath = Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("")).getPath();
-        String propertiesPath = rootPath+"MiFactory.properties";
+        String propertiesPath = rootPath + "MiFactory.properties";
 
 
         try {

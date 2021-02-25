@@ -2,7 +2,7 @@ package paquete;
 
 import java.util.Comparator;
 
-public class BubbleSorterImple <T> implements Sorter<T> {
+public class BubbleSortSorterImple<T> implements Sorter<T> {
 
     @Override
     public <T> void sort(T[] arr, Comparator<T> c) {
